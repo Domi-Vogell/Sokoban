@@ -1,0 +1,13 @@
+{
+  "name": "3DWorld",
+  "version": "0.01.9",
+  "author": "Dominik",
+  "dependencies": {
+    "sass": "^1.42.1",
+    "three": "^0.127"
+  },
+  "scripts": {
+    "compile_sass": "sass ./src/styles/ui.scss ./test/style/ui.css",
+    "watch_sass": "sass --watch ./src/styles/ui.scss ./test/style/ui.css"
+  }
+}
