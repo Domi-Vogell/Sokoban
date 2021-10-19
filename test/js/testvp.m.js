@@ -1074,7 +1074,9 @@ const initialisierung = function(){
     document.addEventListener( 'startClicked', startGame );
     document.addEventListener( 'fortsetzenClicked', continueGame );
     document.addEventListener( 'resetClicked', resetGame );
-    VP.scene.addEventListener("click", onclick, true);
+    VP.scene.addEventListener( "click", onclick, true );
+    VP.scene.addEventListener( "mouseup", onMouseup, true );
+    window.addEventListener( 'keydown', onkeydown );
 
     level = parseInt( url.searchParams.get("level") || 1 );
     if( level > myStorage.getItem( 'highestLevel' ) ){
@@ -1091,16 +1093,127 @@ const initialisierung = function(){
     ui.Startseite();    
 }
 
+function onMouseup( ev ){
+    //Platzhalter
+}
+
 function onclick( ev ){
+    //while( playground.standortInRasterSpalte != StartpunktSpalte && playground.standortInRasterZeile != StartpunktZeile ){
+    //     if( zeilenAbstand < 0 ){
+    //         for( let i = StartpunktZeile; i > playground.standortInRasterZeile; i-- ){
+    //             if( raster[i][StartpunktSpalte] == 0 ){
+    //                 AktuellerStandortZeile = i;
+    //                 continue;
+    //             } else {
+    //                 break;
+    //             }
+    //        }
+    //        if( spaltenAbstand < 0 ){
+    //            for( let k = StartpunktSpalte; k > playground.standortInRasterSpalte; k-- ){ 
+    //                if( raster[AktuellerStandortZeile][k] == 0 ){
+    //                    AktuellerStandortSpalte = k;
+    //                    continue;
+    //                } else {
+    //                    AktuellerStandortZeile += 1;
+    //                    k += 1;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}   
+
+    let StartpunktZeile = playground.standortInRasterZeile;
+    let StartpunktSpalte = playground.standortInRasterSpalte;
+
     playground.position = new THREE.Vector3( ev.intersect.point.x, 130, ev.intersect.point.z  );
-    playground.searchStandort();
-    if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte] == 0 || raster[playground.standortInRasterZeile][playground.standortInRasterSpalte] == 4 ){
-        mhkzwerg.position.set( playground.standortInRasterSpalte * playground.quadrat + 50, 130, playground.standortInRasterZeile * playground.quadrat + 50 );
-    } else if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte] == 3 ){
-        //Box einen weiter (größere Differenz von Ausgangsposition und Endposition von x oder y als Richtung der Box-Verschiebung nutzen)
-        //wenn Box donematerial hat, Position auf 4 ändern
-        mhkzwerg.position.set( playground.standortInRasterSpalte * playground.quadrat + 50, 130, playground.standortInRasterZeile * playground.quadrat + 50 );
+    playground.searchStandortCheck();
+
+    if(( StartpunktZeile - playground.clickedStandortZeile ) == -1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ){
+        window.dispatchEvent( new KeyboardEvent('keydown', {
+            'key': 'ArrowDown'
+        }));
+    } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ){
+        window.dispatchEvent( new KeyboardEvent('keydown', {
+            'key': 'ArrowUp'
+        }));
+    } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 1 ){
+        window.dispatchEvent( new KeyboardEvent('keydown', {
+            'key': 'ArrowLeft'
+        }));
+    } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == -1 ){
+        window.dispatchEvent( new KeyboardEvent('keydown', {
+            'key': 'ArrowRight'
+        }));
     }
+   
+    //console.log( StartpunktZeile, playground.clickedStandortZeile );
+    //console.log( StartpunktSpalte, playground.clickedStandortSpalte );
+    //if( raster[playground.clickedStandortZeile][playground.clickedStandortSpalte] == 0 || raster[playground.clickedStandortZeile][playground.clickedStandortSpalte] == 4 ){
+    //    if( (( StartpunktZeile - playground.clickedStandortZeile ) == -1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ) || (( StartpunktZeile - playground.clickedStandortZeile ) == 1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 )){
+    //        mhkzwerg.position.set( playground.clickedStandortSpalte * playground.quadrat + 50, 130, playground.clickedStandortZeile * playground.quadrat + 50 );
+    //        StartpunktZeile = playground.clickedStandortZeile;
+    //        StartpunktSpalte = playground.clickedStandortSpalte;
+    //        playground.searchStandort();
+    //    } else if( (( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == -1 ) || (( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 1 )){
+    //        mhkzwerg.position.set( playground.clickedStandortSpalte * playground.quadrat + 50, 130, playground.clickedStandortZeile * playground.quadrat + 50 );
+    //        StartpunktZeile = playground.clickedStandortZeile;
+    //        StartpunktSpalte = playground.clickedStandortSpalte;
+    //        playground.searchStandort();
+    //    }
+    //} else if( raster[playground.clickedStandortZeile][playground.clickedStandortSpalte] == 3 ){
+    //    //Box einen weiter (größere Differenz von Ausgangsposition und Endposition von x oder y als Richtung der Box-Verschiebung nutzen)
+    //    //wenn Box donematerial hat, Position auf 4 ändern
+    //    if( (( StartpunktZeile - playground.clickedStandortZeile ) == -1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ) || (( StartpunktZeile - playground.clickedStandortZeile ) == 1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 )){
+    //       for( let i = 0; i < playground.boxen.length; i++ ) {
+    //           console.log( playground.boxen[i].rasterPosition.x, playground.boxen[i].rasterPosition.y );
+    //            if( playground.boxen[i].rasterPosition.x == playground.clickedStandortZeile && playground.boxen[i].rasterPosition.y == playground.clickedStandortSpalte ){
+    //                let moveBox = playground.boxen[i];
+    //                if( moveBox.material == textures.donematerial ){
+    //                    moveBox.material = textures.matcrate;
+    //                    raster[playground.clickedStandortZeile][playground.clickedStandortSpalte] = 4;
+    //                }
+//
+    //                console.log( StartpunktZeile - playground.clickedStandortZeile );
+    //                    //In beliebige Richtung verschieben + im Raster ändern
+    //                if(( StartpunktZeile - playground.clickedStandortZeile ) < 0 ){
+    //                    moveBox.position.z += playground.quadrat;
+    //                    moveBox.rasterPosition.x += 1;
+//
+    //                    if( raster[playground.clickedStandortZeile + 1][playground.clickedStandortSpalte] == 4 ){
+    //                        moveBox.material = textures.donematerial;
+    //                    }
+    //                    raster[playground.clickedStandortZeile][playground.clickedStandortSpalte] = 0;
+    //                    raster[playground.clickedStandortZeile + 1][playground.clickedStandortSpalte] = 3;
+    //                }
+//
+    //                if(( StartpunktZeile - playground.clickedStandortZeile ) > 0 ){
+    //                    console.log( StartpunktZeile - playground.clickedStandortZeile );
+    //                    moveBox.position.z -= playground.quadrat;
+    //                    moveBox.rasterPosition.x -= 1;
+    //                    raster[playground.clickedStandortZeile - 1][playground.clickedStandortSpalte] = 3;
+//
+    //                    if( raster[playground.clickedStandortZeile - 1][playground.clickedStandortSpalte] == 4 ){
+    //                        moveBox.material = textures.donematerial;
+    //                    }
+//
+    //                    raster[playground.clickedStandortZeile - 1][playground.clickedStandortSpalte] = 3;
+    //                }
+//
+    //                break;
+    //            }
+    //        }
+    //        
+    //        mhkzwerg.position.set( playground.clickedStandortSpalte * playground.quadrat + 50, 130, playground.clickedStandortZeile * playground.quadrat + 50 );
+    //        StartpunktZeile = playground.clickedStandortZeile;
+    //        StartpunktSpalte = playground.clickedStandortSpalte;
+    //        playground.searchStandort();
+    //    } else if( (( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == -1 ) || (( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 1 )){
+    //        mhkzwerg.position.set( playground.clickedStandortSpalte * playground.quadrat + 50, 130, playground.clickedStandortZeile * playground.quadrat + 50 );
+    //        StartpunktZeile = playground.clickedStandortZeile;
+    //        StartpunktSpalte = playground.clickedStandortSpalte;
+    //        playground.searchStandort();
+    //    }
+    //}
 }
 
 const levelAufbau = function(){

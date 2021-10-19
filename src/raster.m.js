@@ -48,6 +48,19 @@ Spielplatz.prototype = Object.assign( Object.create( Object.prototype ), {
             }
         }
     },
+    searchStandortCheck: function(){
+        for( let i = 0; i < this.zeilen; i++ ){
+            for( let k = 0; k < this.spalten; k++ ){
+                let br = new THREE.Vector3( this.quadrat * (k+1) + this.quadrat / 2, 0, this.quadrat * (i+1) + this.quadrat / 2 );
+                let tl = new THREE.Vector3( this.quadrat * k, 0, this.quadrat * i );
+                if( this.position.x > tl.x && this.position.x < br.x && this.position.z > tl.z && this.position.z < br.z ){
+                    this.clickedStandortZeile = i;
+                    this.clickedStandortSpalte = k;
+                }
+            }
+        }
+    },
+
     einlesen: function( callback ){
         let scope = this;
         fetch( "../JSON/test.json" )

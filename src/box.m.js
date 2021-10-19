@@ -16,7 +16,6 @@ const Box = function( opts ){
     THREE.Mesh.call( this, geometry, textures.matcrate );
 
     this.rasterPosition = new THREE.Vector2();
-    
 }
 
 Box.prototype = Object.assign( Object.create( THREE.Mesh.prototype ), {
