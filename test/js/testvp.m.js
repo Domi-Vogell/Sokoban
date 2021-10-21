@@ -1,14 +1,4 @@
-import * as pack from './playground.m.js';
-import { Zwerg } from '../../src/zwerg.m.js';
-//import { Figur } from '../../src/figur.m.js';
-import { Spielplatz } from "../../src/raster.m.js";
-import { Box } from "../../src/box.m.js";
-import { Wand } from '../../src/wand.m.js';
-import { Zielfeld } from '../../src/zielfeld.m.js';
-import { Textures } from '../../src/textures.m.js';
-import { Boden } from '../../src/boden.m.js';
-import { myTween } from '../../src/tweens.m.js';
-import { UI } from '../../src/ui.m.js';
+import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI } from "../../src/pack.m.js"
 
 //Parameter-Einlesung
 let url = new URL( window.location.href );

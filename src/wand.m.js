@@ -1,5 +1,7 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as pack from "./playground.m.js";
 import { Textures } from '../../src/textures.m.js';
+
+const THREE = pack.THREE;
 
 const Wand = function( opts ){
     const defaults = {

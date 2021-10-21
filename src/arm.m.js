@@ -1,5 +1,7 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as pack from "./playground.m.js";
 import { Gelenk } from "./gelenk.m.js";
+
+const THREE = pack.THREE;
 
 const Arm = function( obj ) {
     const geoArm = new THREE.BoxGeometry( 2, 0.5 );

@@ -1,7 +1,3 @@
-import * as pack from '../test/js/playground.m.js';
-
-const THREE = pack.THREE;
-
 const myTween = function( VP, playground ){
     const scope = this;
     this.tweenReset = function( mhkzwerg ){

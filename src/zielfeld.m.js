@@ -1,4 +1,6 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as pack from "./playground.m.js";
+
+const THREE = pack.THREE;
 
 const Zielfeld = function(){
     const geometry = new THREE.PlaneGeometry( 100, 100 );

@@ -1,4 +1,6 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
+import * as pack from "./playground.m.js";
+
+const THREE = pack.THREE;
 
 const Kopf = function( obj ){    
     const geoKopf = new THREE.SphereGeometry( 2, 32, 32 );
