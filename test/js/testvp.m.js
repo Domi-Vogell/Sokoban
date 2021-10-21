@@ -1,6 +1,6 @@
 import * as pack from './playground.m.js';
 import { Zwerg } from '../../src/zwerg.m.js';
-import { Figur } from '../../src/figur.m.js';
+//import { Figur } from '../../src/figur.m.js';
 import { Spielplatz } from "../../src/raster.m.js";
 import { Box } from "../../src/box.m.js";
 import { Wand } from '../../src/wand.m.js';
@@ -8,7 +8,7 @@ import { Zielfeld } from '../../src/zielfeld.m.js';
 import { Textures } from '../../src/textures.m.js';
 import { Boden } from '../../src/boden.m.js';
 import { myTween } from '../../src/tweens.m.js';
-import {UI} from '../../src/ui.m.js';
+import { UI } from '../../src/ui.m.js';
 
 //Parameter-Einlesung
 let url = new URL( window.location.href );
@@ -18,23 +18,23 @@ let level;
 //SZENEN-INITIALISIERUNG
 const ui = new UI();
 const THREE = pack.THREE;
-const VP = new pack.Playground( { grassground: false }).VP;
+const VP = new pack.Playground({ grassground: false }).VP;
 VP.camera.position.x = 500;
 VP.camera.position.y = 600;
 VP.camera.position.z = 1300;
 VP.camera.lookAt( 500, 150, 500 );
 VP.scene.background = new THREE.Color( 0xcccccc );
 // add a ambient light
-VP.scene.add( new THREE.AmbientLight( 0x020202 ) );
+VP.scene.add( new THREE.AmbientLight( 0x020202 ));
 // add a light in front
 let light = new THREE.DirectionalLight( 'white', 2 );
-light.position.set(100, 100, 300);
+light.position.set( 100, 100, 300 );
 VP.scene.add( light );
 const textures = new Textures();
 let toggleTaste = false;
 
 //FIGUR
-const mhkzwerg = new Zwerg( { hutfarbe: 0xFF0000, groesse: 0.8, textur: textures.matFigur } );
+const mhkzwerg = new Zwerg({ hutfarbe: 0xFF0000, groesse: 0.8, textur: textures.matFigur });
 VP.scene.add( mhkzwerg );
 
 //RASTER
@@ -125,9 +125,9 @@ const setZwergStandort = function(){
         }
     }
 
-    setTimeout(function() {
+    setTimeout( function() {
         levelErfolgreich();
-    }, 2000);
+    }, 2000 );
 }
 
 
@@ -173,16 +173,16 @@ const resetGame = function(){
 
 
 const initialisierung = function(){
-    document.addEventListener( 'rasterReady'        , holdirRaster );
-    document.addEventListener( 'levelErfolgreich'   , afterLevel );
-    document.addEventListener( 'tastenFreigeben'    , setZwergStandort );
-    document.addEventListener( 'buttonClicked'      , loadLevelClicked );
-    document.addEventListener( 'weiterClicked'      , weiterClicked );
-    document.addEventListener( 'startClicked'       , startGame );
-    document.addEventListener( 'fortsetzenClicked'  , continueGame );
-    document.addEventListener( 'resetClicked'       , resetGame );
-    VP.scene.addEventListener( 'click'              , onclick );
-    window.addEventListener  ( 'keydown'            , onkeydown );
+    document.addEventListener( 'rasterReady'        , holdirRaster      );
+    document.addEventListener( 'levelErfolgreich'   , afterLevel        );
+    document.addEventListener( 'tastenFreigeben'    , setZwergStandort  );
+    document.addEventListener( 'buttonClicked'      , loadLevelClicked  );
+    document.addEventListener( 'weiterClicked'      , weiterClicked     );
+    document.addEventListener( 'startClicked'       , startGame         );
+    document.addEventListener( 'fortsetzenClicked'  , continueGame      );
+    document.addEventListener( 'resetClicked'       , resetGame         );
+    VP.scene.addEventListener( 'click'              , onclick           );
+    window.addEventListener  ( 'keydown'            , onkeydown         );
 
     level = parseInt( url.searchParams.get( "level" ) || 1 );
     if( level > myStorage.getItem( 'highestLevel' ) ){
@@ -201,30 +201,6 @@ const initialisierung = function(){
 
 
 function onclick( ev ){
-    //while( playground.standortInRasterSpalte != StartpunktSpalte && playground.standortInRasterZeile != StartpunktZeile ){
-    //     if( zeilenAbstand < 0 ){
-    //         for( let i = StartpunktZeile; i > playground.standortInRasterZeile; i-- ){
-    //             if( raster[i][StartpunktSpalte] == 0 ){
-    //                 AktuellerStandortZeile = i;
-    //                 continue;
-    //             } else {
-    //                 break;
-    //             }
-    //        }
-    //        if( spaltenAbstand < 0 ){
-    //            for( let k = StartpunktSpalte; k > playground.standortInRasterSpalte; k-- ){ 
-    //                if( raster[AktuellerStandortZeile][k] == 0 ){
-    //                    AktuellerStandortSpalte = k;
-    //                    continue;
-    //                } else {
-    //                    AktuellerStandortZeile += 1;
-    //                    k += 1;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}   
-
     let StartpunktZeile = playground.standortInRasterZeile;
     let StartpunktSpalte = playground.standortInRasterSpalte;
 

@@ -1,4 +1,4 @@
-#Levelanzeige {
+#Levelanzeige{
     color: white;
     font-size:40px;
     text-align: center;
@@ -6,7 +6,7 @@
     background-color: green;
 }
 
-.levelActive {
+.levelActive{
     text-align: center;
     background-color: green;
     color: white;
@@ -16,7 +16,12 @@
     margin: 3px;
 }
 
-.levelInactive {
+.levelActive:hover{
+    background-color: lightgreen;
+    color: grey;
+}
+
+.levelInactive{
     text-align: center;
     background-color: grey;
     color: white;
@@ -71,7 +76,7 @@
     color: white;
 }
 
-.btnAktiv:hover {
+.btnAktiv:hover{
     background-color: lightgreen;
     color: grey;
 }

@@ -869,7 +869,7 @@ const myTween = function( VP, playground ){
 
         tweenKopf.onUpdate( function(){
             mhkzwerg.kopf.rotation.y = zwergKopf.y;
-            });
+        });
         
         let zwergDrehen = { y: mhkzwerg.rotation.y };
         let targetDrehen = { y: 0 };
