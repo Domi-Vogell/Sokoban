@@ -4574,7 +4574,8 @@ const DomEvents = function( camera, domElement )
 	this.timeStamp = null;
 	
 	this.onRemove = function(){ _this.removeFromDom.apply( _this, arguments ); };
-	this.onAdd = function( ev ) { console.log(ev.target);
+	this.onAdd = function( ev ) { 
+    //console.log(ev.target);
 		const obj = ev.target? ev.target : ev; 
 		_this.addToDom.call( _this, obj ); 
 	};

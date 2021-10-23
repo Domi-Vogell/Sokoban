@@ -5,22 +5,22 @@ const THREE = pack.THREE;
 const Textures = function() {
     THREE.Object3D.call( this );
     const loader = new THREE.TextureLoader();
-    const textureCrate = loader.load( './textures/crate.gif' );
+    const textureCrate = loader.load( '../test/textures/crate.gif' );
     this.matcrate = new THREE.MeshBasicMaterial( {
     map: textureCrate
     });
 
-    const textureBackstein = loader.load( './textures/backstein.jpg' );
+    const textureBackstein = loader.load( '../test/textures/backstein.jpg' );
     this.matbackstein = new THREE.MeshBasicMaterial( {
     map: textureBackstein
     });
 
-    const textureWood = loader.load( './textures/holz.jpg' );
+    const textureWood = loader.load( '../test/textures/holz.jpg' );
     this.matFigur = new THREE.MeshBasicMaterial( {
     map: textureWood
     });
 
-    const textureBoden = loader.load( './textures/boden.jpg' );
+    const textureBoden = loader.load( '../test/textures/boden.jpg' );
     textureBoden.wrapS = THREE.RepeatWrapping;
     textureBoden.wrapT = THREE.RepeatWrapping;
     textureBoden.repeat.set( 100, 100 );

@@ -1,4 +1,4 @@
-import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI } from "../../src/pack.m.js"
+import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI } from "../../src/import.m.js"
 
 //Parameter-Einlesung
 let url = new URL( window.location.href );
@@ -14,6 +14,7 @@ VP.camera.position.y = 600;
 VP.camera.position.z = 1300;
 VP.camera.lookAt( 500, 150, 500 );
 VP.scene.background = new THREE.Color( 0xcccccc );
+VP.control.enabled = false;
 // add a ambient light
 VP.scene.add( new THREE.AmbientLight( 0x020202 ));
 // add a light in front
