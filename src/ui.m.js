@@ -220,10 +220,20 @@ const UI = function(){
         }   
     };
 
+    this.cameraOneHandler = function( ev ){
+        const event = new Event( 'cameraOne' );
+        document.dispatchEvent( event );
+    };
+    
+    this.cameraTwoHandler = function( ev ){
+        const event = new Event( 'cameraTwo' );
+        document.dispatchEvent( event );
+    };
 
     this.addButton = function( anzahl ){
         let newDiv;
         let ContentWrapper = document.getElementById( "Seitenleiste");
+        ContentWrapper.style.visibility = "hidden";
         if( document.getElementById("Levelauswahl") ){
             newDiv = document.getElementById("Levelauswahl");
         } else {
@@ -241,11 +251,27 @@ const UI = function(){
         let siteDiv = document.createElement( "div" );
         siteDiv.id = "siteDiv";
 
+        let cameraDiv = document.createElement( "div" );
+        cameraDiv.id = "cameraDiv";
+
+        let cameraPosOne = document.createElement( "button" );
+        cameraPosOne.id = "cameraOne";
+        cameraPosOne.textContent = "Kamera 1";
+        cameraPosOne.classList.add( "btnSite" );
+        cameraPosOne.classList.add( "btnAktiv" );
+        cameraPosOne.onpointerup = this.cameraOneHandler;
+
+        let cameraPosTwo = document.createElement( "button" );
+        cameraPosTwo.id = "cameraTwo";
+        cameraPosTwo.textContent = "Kamera 2";
+        cameraPosTwo.classList.add( "btnSite" );
+        cameraPosTwo.classList.add( "btnAktiv" );
+        cameraPosTwo.onpointerup = this.cameraTwoHandler;
+
         let menuBtn = document.createElement( "button" );
         menuBtn.id = "menuBtn";
         menuBtn.textContent = "Menü";
         menuBtn.classList.add( "btnSite" );
-        menuBtn.classList.add( "active" );
         menuBtn.onpointerup = this.menuHandler;
 
         let resetBtn = document.createElement( "button" );
@@ -255,8 +281,11 @@ const UI = function(){
         resetBtn.onpointerup = this.resetHandler;
         
         ContentWrapper.appendChild( newDiv );
+        cameraDiv.appendChild( cameraPosOne );
+        cameraDiv.appendChild( cameraPosTwo );
         siteDiv.appendChild( menuBtn );
         siteDiv.appendChild( resetBtn );
+        ContentWrapper.appendChild( cameraDiv );
         ContentWrapper.appendChild( siteDiv );
     }
 }

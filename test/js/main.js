@@ -9,10 +9,12 @@ let level;
 const ui = new UI();
 const THREE = pack.THREE;
 const VP = new pack.Playground({ grassground: false }).VP;
-VP.camera.position.x = 500;
+VP.camera.position.x = 400;
 VP.camera.position.y = 600;
-VP.camera.position.z = 1300;
-VP.camera.lookAt( 500, 150, 500 );
+VP.camera.position.z = 1000;
+VP.camera.lookAt( 400, 0, 250 );
+
+
 VP.scene.background = new THREE.Color( 0xcccccc );
 VP.control.enabled = false;
 // add a ambient light
@@ -162,6 +164,19 @@ const resetGame = function(){
     level = 1;
 }
 
+const cameraOne = function(){
+    VP.camera.position.x = 400;
+    VP.camera.position.y = 600;
+    VP.camera.position.z = 1000;
+    VP.camera.lookAt( 400, 0, 250 );
+}
+
+const cameraTwo = function(){
+    VP.camera.position.x = 450;
+    VP.camera.position.y = 1000;
+    VP.camera.position.z = 300;
+    VP.camera.lookAt( 450, 0, 300 );
+}
 
 const initialisierung = function(){
     document.addEventListener( 'rasterReady'        , holdirRaster      );
@@ -172,6 +187,8 @@ const initialisierung = function(){
     document.addEventListener( 'startClicked'       , startGame         );
     document.addEventListener( 'fortsetzenClicked'  , continueGame      );
     document.addEventListener( 'resetClicked'       , resetGame         );
+    document.addEventListener( 'cameraOne'          , cameraOne         );
+    document.addEventListener( 'cameraTwo'          , cameraTwo         );
     VP.scene.addEventListener( 'click'              , onclick           );
     window.addEventListener  ( 'keydown'            , onkeydown         );
 
