@@ -237,19 +237,19 @@ function onclick( ev ){
     playground.searchStandortCheck();
 
     if(( StartpunktZeile - playground.clickedStandortZeile ) == -1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ){
-        window.dispatchEvent( new KeyboardEvent('keydown', {
+        window.dispatchEvent( new KeyboardEvent('keyup', {
             'key': 'ArrowDown'
         }));
     } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 1 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 0 ){
-        window.dispatchEvent( new KeyboardEvent('keydown', {
+        window.dispatchEvent( new KeyboardEvent('keyup', {
             'key': 'ArrowUp'
         }));
     } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == 1 ){
-        window.dispatchEvent( new KeyboardEvent('keydown', {
+        window.dispatchEvent( new KeyboardEvent('keyup', {
             'key': 'ArrowLeft'
         }));
     } else if(( StartpunktZeile - playground.clickedStandortZeile ) == 0 && ( StartpunktSpalte - playground.clickedStandortSpalte ) == -1 ){
-        window.dispatchEvent( new KeyboardEvent('keydown', {
+        window.dispatchEvent( new KeyboardEvent('keyup', {
             'key': 'ArrowRight'
         }));
     }
