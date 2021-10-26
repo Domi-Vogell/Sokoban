@@ -343,7 +343,7 @@ const levelErfolgreich = function(){
 initialisierung();
 
 
-onkeydown = function( event ){
+onkeyup = function( event ){
     if( toggleTaste ){
         return;
     }

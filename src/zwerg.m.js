@@ -16,20 +16,7 @@ this.kopf.add( this.hut );
 
 
 Zwerg.prototype = Object.assign( Object.create( Figur.prototype ), {
-    constructor : Zwerg,
-    onClick: function( param ){
-        Figur.prototype.onClick.call( this, param );
-        if( this.hut.position.y == 3 ){
-            this.hut.hutAb();
-        }
-    },
-
-    deselect: function( param ) {
-        if( this.hut.position.y == 4 )
-            this.hut.hutAufsetzen();
-
-        Figur.prototype.deselect.call( this, param );  
-    }
+    constructor : Zwerg
 });
 
 export{ Zwerg };

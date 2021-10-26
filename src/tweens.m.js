@@ -318,7 +318,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1600 );
+        }, 2000 );
     }
 
     this.tweenBoxUnten = function( box, mhkzwerg ){
@@ -459,7 +459,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1600 );
+        }, 2000 );
     }
 
     this.tweenBoxOben = function( box, mhkzwerg ){
@@ -601,7 +601,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1600 );
+        }, 2000 );
     }
 
     this.tweenJubeln = function( mhkzwerg ){
@@ -770,7 +770,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 2000 );
     }
 
     this.tweenMoveLeft = function( mhkzwerg ){
@@ -812,7 +812,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 2000 );
     }
 
     this.tweenMoveUp = function( mhkzwerg ){
@@ -854,7 +854,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 2000 );
     }
 
     this.tweenMoveDown = function( mhkzwerg ){
@@ -896,7 +896,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 2000 );
     }
 };
 
