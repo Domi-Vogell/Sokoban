@@ -174,18 +174,18 @@ const resetGame = function(){
 }
 
 const cameraOne = function(){
-    VP.camera.position.x = 400;
+    VP.camera.position.x = 500;
     VP.camera.position.y = 600;
-    VP.camera.position.z = 1000;
-    VP.camera.lookAt( 400, 0, 250 );
+    VP.camera.position.z = 1200;
+    VP.camera.lookAt( 500, 0, 250 );
     myStorage.setItem( 'cameraPosition', 1 );
 }
 
 const cameraTwo = function(){
-    VP.camera.position.x = 450;
+    VP.camera.position.x = 500;
     VP.camera.position.y = 1000;
-    VP.camera.position.z = 300;
-    VP.camera.lookAt( 450, 0, 300 );
+    VP.camera.position.z = 350;
+    VP.camera.lookAt( 500, 0, 350 );
     myStorage.setItem( 'cameraPosition', 2 );
 }
 
@@ -225,7 +225,7 @@ const initialisierung = function(){
         myStorage.setItem( 'cameraPosition', 1 );
     }
 
-    ui.Startseite();    
+    ui.Startseite();
 }
 
 
@@ -357,6 +357,7 @@ onkeyup = function( event ){
         }
         else if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 1] == 3 ){
             if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 2] == 1 || raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 2] == 3 ){
+                toggleTaste = false;
                 return;
             }
             else {
@@ -401,6 +402,7 @@ onkeyup = function( event ){
         }
         else if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 1] == 3 ){
             if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 2] == 1 || raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 2] == 3 ){
+                toggleTaste = false;
                 return;
             }
             else {
@@ -445,6 +447,7 @@ onkeyup = function( event ){
         }
         else if( raster[playground.standortInRasterZeile - 1][playground.standortInRasterSpalte] == 3 ){
             if( raster[playground.standortInRasterZeile - 2][playground.standortInRasterSpalte] == 1 || raster[playground.standortInRasterZeile - 2][playground.standortInRasterSpalte] == 3 ){
+                toggleTaste = false;
                 return;
             }
             else {
@@ -490,6 +493,7 @@ onkeyup = function( event ){
         }
         else if( raster[playground.standortInRasterZeile + 1][playground.standortInRasterSpalte] == 3 ){
             if( raster[playground.standortInRasterZeile + 2][playground.standortInRasterSpalte] == 1 || raster[playground.standortInRasterZeile + 2][playground.standortInRasterSpalte] == 3 ){
+                toggleTaste = false;
                 return;
             }
             else {
