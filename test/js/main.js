@@ -20,14 +20,18 @@ VP.control.enabled = false;
 // add a ambient light
 VP.scene.add( new THREE.AmbientLight( 0x020202 ));
 // add a light in front
-let light = new THREE.DirectionalLight( 'white', 2 );
-light.position.set( 100, 100, 300 );
+let light = new THREE.SpotLight( 0xffffff );
+light.position.set( 0, 1, 0 );
+light.castShadow = true;
+VP.renderer.shadowMap.enabled = true
+VP.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 VP.scene.add( light );
 const textures = new Textures();
 let toggleTaste = false;
 
 //FIGUR
 const mhkzwerg = new Zwerg({ hutfarbe: 0xFF0000, groesse: 0.8, textur: textures.matFigur });
+mhkzwerg.castShadow = true;
 VP.scene.add( mhkzwerg );
 
 //RASTER
@@ -51,8 +55,9 @@ const rasterBauen = function(){
             if( raster[i][k] == 1 ){
                 const wall = new Wand({ height: 30 });
                 wall.position.set( k * playground.quadrat + playground.quadrat / 2, 17, i * playground.quadrat + playground.quadrat / 2 );
+                wall.receiveShadow = true;
+                wall.castShadow = true;
                 playground.wand.push( wall );
-                
                 VP.scene.add( wall );
             }
             else if( raster[i][k] == 2 ){
@@ -66,6 +71,8 @@ const rasterBauen = function(){
                 b.rasterPosition.set( i, k );
                 playground.boxen.push( b );
                 b.position.set( k * playground.quadrat + playground.quadrat / 2, 40, i * playground.quadrat + playground.quadrat / 2 );
+                b.castShadow = true;
+                b.receiveShadow = true;
                 VP.scene.add( b );
             }
             else if( raster[i][k] == 4 ){
@@ -82,10 +89,12 @@ const rasterBauen = function(){
                 
                 const box = new Box({ width: 80, height: 80, depth: 80 });
                 box.rasterPosition.set( i, k );
-                playground.boxen.push( box );
                 box.position.set( k * playground.quadrat + playground.quadrat / 2, 40, i * playground.quadrat + playground.quadrat / 2 );
+                box.receiveShadow = true;
+                box.castShadow = true;
                 box.material = textures.donematerial;
                 raster[i][k] = 3;
+                playground.boxen.push( box );
                 VP.scene.add( box );
             }
         }
@@ -160,7 +169,7 @@ const weiterClicked = function(){
 
 
 const resetGame = function(){
-    myStorage.clear();
+    myStorage.removeItem( 'highestLevel' );
     level = 1;
 }
 
@@ -169,6 +178,7 @@ const cameraOne = function(){
     VP.camera.position.y = 600;
     VP.camera.position.z = 1000;
     VP.camera.lookAt( 400, 0, 250 );
+    myStorage.setItem( 'cameraPosition', 1 );
 }
 
 const cameraTwo = function(){
@@ -176,6 +186,7 @@ const cameraTwo = function(){
     VP.camera.position.y = 1000;
     VP.camera.position.z = 300;
     VP.camera.lookAt( 450, 0, 300 );
+    myStorage.setItem( 'cameraPosition', 2 );
 }
 
 const initialisierung = function(){
@@ -202,6 +213,16 @@ const initialisierung = function(){
     } else {
         ui.highestLevel = level;
         myStorage.setItem( 'highestLevel', ui.highestLevel );
+    }
+
+    if( myStorage.getItem( 'cameraPosition' )){
+        if( myStorage.getItem( 'cameraPosition' ) == 1 ){
+            cameraOne();
+        } else {
+            cameraTwo();
+        }
+    } else {
+        myStorage.setItem( 'cameraPosition', 1 );
     }
 
     ui.Startseite();    
@@ -327,7 +348,7 @@ onkeydown = function( event ){
         return;
     }
 
-    if( event.key == "ArrowLeft" )
+    if( event.key == "ArrowLeft" || event.key == "a" || event.key == "A" )
     {
         toggleTaste = true;
         if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 1] == 1 ){
@@ -371,7 +392,7 @@ onkeydown = function( event ){
             tween.tweenMoveLeft( mhkzwerg );
         }
     }
-    else if( event.key == "ArrowRight" )
+    else if( event.key == "ArrowRight" || event.key == "d" || event.key == "D" )
     {
         toggleTaste = true;
         if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 1] == 1 ){
@@ -415,7 +436,7 @@ onkeydown = function( event ){
             tween.tweenMoveRight( mhkzwerg );
         }
     }
-    else if( event.key == "ArrowUp" )
+    else if( event.key == "ArrowUp" || event.key == "w" || event.key == "W" )
     {
         toggleTaste = true;
         if( raster[playground.standortInRasterZeile - 1][playground.standortInRasterSpalte] == 1 ){
@@ -460,7 +481,7 @@ onkeydown = function( event ){
 
         }
     }
-    else if( event.key == "ArrowDown" )
+    else if( event.key == "ArrowDown" || event.key == "s" || event.key == "S" )
     {
         toggleTaste = true;
         if( raster[playground.standortInRasterZeile + 1][playground.standortInRasterSpalte] == 1 ){

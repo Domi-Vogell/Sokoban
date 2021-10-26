@@ -5488,7 +5488,7 @@ const Playground = function( opts ) {
         
         if ( o.domevents ){
             VP.scene.onClick = function( ev ){
-                console.log("click", ev);
+                //console.log("click", ev);
             }; 
             DomEvents.extend( DomeventPointer.config({emulateMouse:true}) );
             this.DEH = new DomEvents( VP.camera, VP.renderer.domElement ).activate( VP.scene );
@@ -5500,12 +5500,9 @@ const Playground = function( opts ) {
         VP.scene.background = new Color$1( 0xcccccc );
 
         // add a ambient light
-        VP.scene.add( new AmbientLight( 0x020202 ) );
+        //VP.scene.add( new AmbientLight( 0x020202 ) );
 
         // add a light in front
-        let light	= new DirectionalLight('white', 2);
-        light.position.set(100, 100, 300);
-        VP.scene.add( light );
 
         if ( o.grassground ){
             // src object for testing

@@ -176,7 +176,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 1600 );
     }
 
     this.tweenBoxLinks = function( box, mhkzwerg ){
@@ -318,7 +318,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 1600 );
     }
 
     this.tweenBoxUnten = function( box, mhkzwerg ){
@@ -459,7 +459,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 1600 );
     }
 
     this.tweenBoxOben = function( box, mhkzwerg ){
@@ -601,7 +601,7 @@ const myTween = function( VP, playground ){
         setTimeout(function() {
             const event = new Event( 'tastenFreigeben' );
             document.dispatchEvent( event );
-        }, 1400 );
+        }, 1600 );
     }
 
     this.tweenJubeln = function( mhkzwerg ){

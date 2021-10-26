@@ -28,7 +28,7 @@ const Textures = function() {
     map: textureBoden
     });
 
-    this.donematerial = new THREE.MeshBasicMaterial( {color: 0x0088FF }); 
+    this.donematerial = new THREE.MeshBasicMaterial({color: 0x0088FF }); 
 
 }
 
