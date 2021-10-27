@@ -9,20 +9,18 @@ let level;
 const ui = new UI();
 const THREE = pack.THREE;
 const VP = new pack.Playground({ grassground: false }).VP;
-VP.camera.position.x = 400;
-VP.camera.position.y = 600;
-VP.camera.position.z = 1000;
-VP.camera.lookAt( 400, 0, 250 );
-
-
-VP.scene.background = new THREE.Color( 0xcccccc );
 VP.control.enabled = false;
+
 // add a ambient light
-VP.scene.add( new THREE.AmbientLight( 0x020202 ));
+//VP.scene.add( new THREE.AmbientLight( 0x020202 ));
 // add a light in front
-let light = new THREE.SpotLight( 0xffffff );
-light.position.set( 0, 1, 0 );
+const light = new THREE.PointLight( 0xff0000, 1, 100 );
+light.position.set( 50, 50, 50 );
 light.castShadow = true;
+VP.scene.add( light );
+
+//let light = new THREE.Point( 0xffffff );
+//light.position.set( 0, 1, 0 );
 VP.renderer.shadowMap.enabled = true
 VP.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 VP.scene.add( light );
@@ -53,7 +51,7 @@ const rasterBauen = function(){
             VP.scene.add( boden );
             
             if( raster[i][k] == 1 ){
-                const wall = new Wand({ height: 30 });
+                const wall = new Wand({ height: 35 });
                 wall.position.set( k * playground.quadrat + playground.quadrat / 2, 17, i * playground.quadrat + playground.quadrat / 2 );
                 wall.receiveShadow = true;
                 wall.castShadow = true;
@@ -371,7 +369,9 @@ onkeyup = function( event ){
                             raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 1] = 4;
                         }
                         if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte - 2] == 4 ){
-                            moveBox.material = textures.donematerial;
+                            setTimeout( function() {
+                                moveBox.material = textures.donematerial;
+                            }, 1600 );
                         }
                         tween.tweenBoxLinks( moveBox, mhkzwerg );
                         moveBox.rasterPosition.y -= 1;
@@ -416,7 +416,9 @@ onkeyup = function( event ){
                             raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 1] = 4;
                         }
                         if( raster[playground.standortInRasterZeile][playground.standortInRasterSpalte + 2] == 4 ){
-                            moveBox.material = textures.donematerial;
+                            setTimeout( function() {
+                                moveBox.material = textures.donematerial;
+                            }, 1600 );
                         }
                         tween.tweenBoxRechts( moveBox, mhkzwerg );
                         moveBox.rasterPosition.y += 1;
@@ -461,7 +463,9 @@ onkeyup = function( event ){
                             raster[playground.standortInRasterZeile - 1][playground.standortInRasterSpalte] = 4;
                         }
                         if( raster[playground.standortInRasterZeile - 2][playground.standortInRasterSpalte] == 4 ){
-                            moveBox.material = textures.donematerial;
+                            setTimeout( function() {
+                                moveBox.material = textures.donematerial;
+                            }, 1600 );
                         }
                         tween.tweenBoxOben( moveBox, mhkzwerg );
                         moveBox.rasterPosition.x -= 1;
@@ -508,7 +512,9 @@ onkeyup = function( event ){
                             raster[playground.standortInRasterZeile + 1][playground.standortInRasterSpalte] = 4;
                         }
                         if( raster[playground.standortInRasterZeile + 2][playground.standortInRasterSpalte] == 4 ){
-                            moveBox.material = textures.donematerial;
+                            setTimeout( function() {
+                                moveBox.material = textures.donematerial;
+                            }, 1600 );
                         }
                         tween.tweenBoxUnten( moveBox, mhkzwerg );
                         moveBox.rasterPosition.x += 1;

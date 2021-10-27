@@ -8,6 +8,7 @@
 }
 
 .levelActive{
+    transition: background-color, color .3s ease-in;
     text-align: center;
     background-color: green;
     color: white;
@@ -77,6 +78,7 @@
 }
 
 .btnAktiv{
+    transition: background-color, color .3s ease-in;
     margin-left: 2px;
     width: 10vw;
     height: 5vh;
