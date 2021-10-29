@@ -14,16 +14,11 @@ VP.control.enabled = false;
 // add a ambient light
 //VP.scene.add( new THREE.AmbientLight( 0x020202 ));
 // add a light in front
-const light = new THREE.PointLight( 0xff0000, 1, 100 );
-light.position.set( 50, 50, 50 );
-light.castShadow = true;
-VP.scene.add( light );
 
 //let light = new THREE.Point( 0xffffff );
 //light.position.set( 0, 1, 0 );
 VP.renderer.shadowMap.enabled = true
 VP.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-VP.scene.add( light );
 const textures = new Textures();
 let toggleTaste = false;
 
@@ -221,6 +216,7 @@ const initialisierung = function(){
         }
     } else {
         myStorage.setItem( 'cameraPosition', 1 );
+        cameraOne();
     }
 
     ui.Startseite();
