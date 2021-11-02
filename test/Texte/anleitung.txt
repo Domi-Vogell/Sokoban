@@ -8,7 +8,7 @@ Man kann Boxen auch wieder von den Zielfeldern herunter schieben. Ein Schieben v
 
 Die Kamera-Position kann in der Seitenleiste der Level ausgewählt werden. Eine Auswahl zwischen zwei Perspektiven steht zur Verfügung.
 
-Wollen Sie aus dem Level zurück ins Menü gelangen, klicken Sie auf den vorgesehenen Button auf der Seitenleiste. Wollen Sie Ihren Spielfortschritt zurücksetzen, klicken Sie auf den "Zurücksetzen"-Button, der ebenso in der Seitenleiste zur Verfügung steht.
+Wollen Sie aus dem Level zurück ins Menü gelangen, klicken Sie auf den vorgesehenen Button auf der Seitenleiste mit der Aufschrift "Menü". Wollen Sie Ihren Spielfortschritt zurücksetzen, klicken Sie auf den "Zurücksetzen"-Button, der ebenso in der Seitenleiste zur Verfügung steht.
 
 Um das Level neu zu laden, klicken Sie auf den Button vom entsprechenden Level in der Seitenleiste.
 

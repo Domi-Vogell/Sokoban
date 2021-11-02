@@ -94,7 +94,7 @@ const UI = function(){
         newWeiterButton.onpointerup = this.continueHandler;
 
         newParagraph.appendChild(newContent);
-        newDiv.appendChild(newParagraph); // füge den Textknoten zum neu erstellten div hinzu.
+        newDiv.appendChild(newParagraph);
         newDiv.appendChild(newWeiterButton);
         var style = document.createElement('style');
         style.innerHTML = `
@@ -105,7 +105,7 @@ const UI = function(){
             border: solid grey;
             text-align: center;
             background-color: #333333;
-            left: 25%;
+            left: 18%;
             top: 25%;
             position: absolute;
         }
@@ -351,8 +351,8 @@ const UI = function(){
         buttonStartDiv.appendChild( newbtnStart );
         buttonStartDiv.appendChild( btnHide );
 
-        startDiv.appendChild(ueberschriftAnleitung); // füge den Textknoten zum neu erstellten div hinzu.
-        startDiv.appendChild(startParagraph); // füge den Textknoten zum neu erstellten div hinzu.
+        startDiv.appendChild(ueberschriftAnleitung);
+        startDiv.appendChild(startParagraph);
         startDiv.appendChild( buttonStartDiv );
         var style = document.createElement('style');
         style.innerHTML = `
@@ -370,6 +370,7 @@ const UI = function(){
             text-align: center;
             background-color: #333333;
             font-size: 50px;
+            margin-top: 3vh;
             margin-bottom: 5vh;
             font-family: sans-serif;
         }
