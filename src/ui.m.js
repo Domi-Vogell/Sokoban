@@ -1,4 +1,7 @@
+import { readText } from "./readText.m.js";
+
 const UI = function(){
+    const myStorage = localStorage;
     const scope = this;
     this.initialisierung = function(){
         this.allLevels = document.querySelectorAll(".Level");
@@ -50,7 +53,7 @@ const UI = function(){
         scope.highestLevel = 1;
         scope.setInactive();
         scope.registerEvents();
-        document.getElementById( "start" ).style.visibility = 'visible'; 
+        document.getElementById( "anleitung" ).style.visibility = 'visible'; 
         document.getElementById( "Seitenleiste" ).style.visibility = 'hidden'; 
         document.getElementById("btnFortsetzen").disabled = true; 
         document.getElementById("btnFortsetzen").classList.remove( "btnAktiv" ); 
@@ -60,13 +63,18 @@ const UI = function(){
         document.getElementById( "resetBtn" ).classList.add( "btnDeaktiv" ); 
         document.getElementById( "resetBtn" ).disabled = true; 
 
+        document.getElementById( 'btnHide' ).classList.remove( "btnDeaktiv" );
+        document.getElementById( 'btnHide' ).classList.add( "btnAktiv" );
+    
+
         const event = new Event( 'resetClicked' );
         document.dispatchEvent( event );
     };
 
     this.continueHandler = function( ev ){
         document.getElementById( "resetBtn" ).classList.remove( "btnDeaktiv" ); 
-        document.getElementById( "resetBtn" ).classList.add( "btnAktiv" ); 
+        document.getElementById( "resetBtn" ).classList.add( "btnAktiv" );
+        document.getElementById( "target" ).style.visibility = 'hidden';
         document.getElementById( "resetBtn" ).disabled = false; 
 
         const event = new Event( 'weiterClicked' );
@@ -138,7 +146,8 @@ const UI = function(){
         if( document.getElementById( "btnFortsetzen" ).classList == "btnDeaktiv" ){
             return;
         }
-        
+
+        console.log( document.getElementById( "start" ));
 
         document.getElementById( "start" ).style.visibility = 'hidden'; 
         document.getElementById( "Seitenleiste" ).style.visibility = 'visible'; 
@@ -152,6 +161,19 @@ const UI = function(){
 
         const event = new Event( 'fortsetzenClicked' );
         document.dispatchEvent( event );
+    };
+
+    this.anleitungClicked = function(){
+        document.getElementById( "anleitung" ).style.visibility = 'visible';
+        if( myStorage.getItem( 'hideAnleitung' ) == 1 ){
+            document.getElementById( 'btnHide' ).classList.add( "btnDeaktiv" );
+            document.getElementById( 'btnHide' ).classList.remove( "btnAktiv" );
+        } else {
+            document.getElementById( 'btnHide' ).classList.remove( "btnDeaktiv" );
+            document.getElementById( 'btnHide' ).classList.add( "btnAktiv" );
+        }
+        document.getElementById( "start" ).style.visibility = 'hidden';
+
     };
 
     this.Startseite = function(){
@@ -174,10 +196,17 @@ const UI = function(){
         newWeiterButton.classList.add( "btnAktiv" );
         newWeiterButton.onpointerup = this.startHandler;
 
+        let anleitungStart = document.createElement("button");
+        anleitungStart.textContent = "Anleitung";
+        anleitungStart.id = "btnAnleitungStart";
+        anleitungStart.classList.add( "btnAktiv" );
+        anleitungStart.onpointerup = this.anleitungClicked;
+
         newParagraph.appendChild(newContent);
         newDiv.appendChild(newParagraph); // füge den Textknoten zum neu erstellten div hinzu.
         buttonDiv.appendChild(newWeiterButton);
         buttonDiv.appendChild(newbtnFortsetzen);
+        buttonDiv.appendChild(anleitungStart);
         newDiv.appendChild(buttonDiv);
         var style = document.createElement('style');
         style.innerHTML = `
@@ -201,6 +230,7 @@ const UI = function(){
         let currentDiv = document.getElementById("Seitenleiste");
         document.body.insertBefore(newDiv, currentDiv);
         currentDiv.style.visibility = 'hidden';
+        newDiv.style.visibility = 'hidden';
 
         if( scope.highestLevel < 2 ){
             newbtnFortsetzen.disabled = true;
@@ -209,7 +239,57 @@ const UI = function(){
         }
     };
 
+    this.startseiteHandler = function(){
+        document.getElementById("completed").style.visibility = "hidden";
+        document.getElementById("start").style.visibility = "visible";
+        console.log( "jetzt" );
+    };
+
+    this.lastLevelCompleted = function(){
+        document.getElementById("Seitenleiste").style.visibility = "hidden";
+        let startDiv = document.createElement("div");
+        startDiv.id = "completed";
+        let startParagraph = document.createElement("p");
+        startParagraph.id = "completeText";
+        let buttonStartDiv = document.createElement("div");
+        buttonStartDiv.id = "btnConDiv";
+        let newStartContent = document.createTextNode("Alle Level geschafft!");
+        let newbtnStart = document.createElement("button");
+        newbtnStart.textContent = "Startseite";
+        newbtnStart.id = "btnStartseite";
+        newbtnStart.classList.add( "btnAktiv" );
+        newbtnStart.onpointerup = this.startseiteHandler;
+
+        startParagraph.appendChild(newStartContent);
+        startDiv.appendChild(startParagraph); // füge den Textknoten zum neu erstellten div hinzu.
+        buttonStartDiv.appendChild(newbtnStart);
+        startDiv.appendChild(buttonStartDiv);
+        var style = document.createElement('style');
+        style.innerHTML = `
+        #completed {
+            color: white;
+            width: 99.9%;
+            height: 99.8%;
+            border: solid grey 1px;
+            text-align: center;
+            background-color: #333333;
+            position: absolute;
+        }
+        #completeText{
+            font-size: 40px;
+            margin-top: 20%;
+        }
+        `;
+        document.head.appendChild(style);
+
+        // füge das neu erstellte Element und seinen Inhalt ins DOM ein
+        let currentDiv = document.getElementById("Seitenleiste");
+        document.body.insertBefore(startDiv, currentDiv);
+        startDiv.style.visibility = 'hidden';
+    };
+
     this.menuHandler = function( ev ){
+        document.getElementById("completed").style.visibility = "hidden";
         document.getElementById( "start" ).style.visibility = 'visible'; 
         document.getElementById( "Seitenleiste" ).style.visibility = 'hidden';
 
@@ -218,6 +298,87 @@ const UI = function(){
             document.getElementById("btnFortsetzen").classList.remove( "btnDeaktiv" ); 
             document.getElementById("btnFortsetzen").classList.add( "btnAktiv" );
         }   
+    };
+
+    this.anleitungHandler = function(){
+        document.getElementById( "start" ).style.visibility = 'visible';
+        document.getElementById( "anleitung" ).style.visibility = 'hidden';
+    };
+
+    this.hideHandler = function(){
+        if( myStorage.getItem( 'hideAnleitung' ) == 1 ){
+            return;
+        }
+
+        if( !myStorage.getItem( 'hideAnleitung' ) ){
+            myStorage.setItem( 'hideAnleitung', 1 );
+            scope.anleitungHandler();
+        } else if( myStorage.getItem( 'hideAnleitung' ) == 0 ){
+            myStorage.setItem( 'hideAnleitung', 1 );
+            scope.anleitungHandler();
+        }
+    }
+
+    this.anleitungAnzeige = function(){
+        document.getElementById("Seitenleiste").style.visibility = "hidden";
+        let startDiv = document.createElement("div");
+        startDiv.id = "anleitung";
+        let ueberschriftAnleitung = document.createElement("h1");
+        ueberschriftAnleitung.innerHTML = "Willkommen zu Sokoban";
+        ueberschriftAnleitung.id = "ueberschrift";
+        let startParagraph = document.createElement("div");
+        startParagraph.id = "anleitungText";
+        readText( "../test/Texte/anleitung.txt", startParagraph );
+
+        let buttonStartDiv = document.createElement("div");
+        let btnHide = document.createElement("button");
+        btnHide.textContent = "Nicht mehr anzeigen";
+        btnHide.id = "btnHide";
+        btnHide.classList.add( "btnAktiv" );
+        btnHide.onpointerup = this.hideHandler;
+
+        if( myStorage.getItem( 'hideAnleitung' ) == 1 ){
+            btnHide.disabled = true;
+            btnHide.classList.add( "btnDeaktiv" );
+            btnHide.classList.remove( "btnAktiv" );
+        }
+
+        let newbtnStart = document.createElement("button");
+        newbtnStart.textContent = "Los geht's!";
+        newbtnStart.id = "btnLos";
+        newbtnStart.classList.add( "btnAktiv" );
+        newbtnStart.onpointerup = this.anleitungHandler;
+        buttonStartDiv.appendChild( newbtnStart );
+        buttonStartDiv.appendChild( btnHide );
+
+        startDiv.appendChild(ueberschriftAnleitung); // füge den Textknoten zum neu erstellten div hinzu.
+        startDiv.appendChild(startParagraph); // füge den Textknoten zum neu erstellten div hinzu.
+        startDiv.appendChild( buttonStartDiv );
+        var style = document.createElement('style');
+        style.innerHTML = `
+        #anleitung {
+            color: white;
+            width: 99.9%;
+            height: 99.8%;
+            border: solid grey 1px;
+            text-align: center;
+            background-color: #333333;
+            position: absolute;
+        }
+        #ueberschrift {
+            color: white;
+            text-align: center;
+            background-color: #333333;
+            font-size: 50px;
+            margin-bottom: 5vh;
+            font-family: sans-serif;
+        }
+        `;
+        document.head.appendChild(style);
+
+        let currentDiv = document.getElementById("Seitenleiste");
+        document.body.insertBefore(startDiv, currentDiv);
+        startDiv.style.visibility = 'hidden';
     };
 
     this.cameraOneHandler = function( ev ){

@@ -157,12 +157,14 @@ const continueGame = function(){
 
 const weiterClicked = function(){
     level = parseInt( level ) + 1;
+
     nextLevel();
 }
 
 
 const resetGame = function(){
     myStorage.removeItem( 'highestLevel' );
+    myStorage.removeItem( 'hideAnleitung' );
     level = 1;
 }
 
@@ -218,9 +220,20 @@ const initialisierung = function(){
         myStorage.setItem( 'cameraPosition', 1 );
         cameraOne();
     }
-
     ui.Startseite();
+
+    ui.anleitungAnzeige();
+    ui.Startseite();
+    ui.lastLevelCompleted();
 }
+
+const initialStart = function(){
+    if( myStorage.getItem( 'hideAnleitung' ) == 0 || myStorage.getItem( 'hideAnleitung' ) === null ){
+        document.getElementById( "anleitung" ).style.visibility = 'visible';
+    } else {
+        document.getElementById( "start" ).style.visibility = 'visible';
+    }
+};
 
 
 function onclick( ev ){
@@ -267,22 +280,24 @@ const ladeLevel = function() {
 
 
 const nextLevel = function(){
-    document.getElementById( "target" ).style.visibility = 'hidden'; 
+    document.getElementById( "start" ).style.visibility = 'hidden'; 
     document.getElementById( "Levelanzeige" ).innerHTML = "Level " + level;
     mhkzwerg.rechterArm.rotation.x = 0;
     mhkzwerg.linkerArm.rotation.x = 0;
     mhkzwerg.rotation.y = 0;
 
     if( playground.raster.length >= level ){
-        if( ui.highestLevel < level ){
+        if( ui.highestLevel < level && playground.raster.length > ui.highestLevel ){
             ui.highestLevel = level;
             myStorage.setItem( 'highestLevel', ui.highestLevel );
         }
         levelAufbau();
     } else {
-        alert( "Weitere Level einlesen, lade Level 1 erneut..." );
+        document.getElementById( "completed" ).style.visibility = 'visible';
+        document.getElementById( "Seitenleiste" ).style.visibility = 'hidden';
         level = 1;
-        levelAufbau();
+        ui.highestLevel = playground.raster.length;
+        myStorage.setItem( 'highestLevel', ui.highestLevel );
     }
     ui.registerEvents();
 }
@@ -335,6 +350,8 @@ const levelErfolgreich = function(){
 
 
 initialisierung();
+initialStart();
+
 
 
 onkeyup = function( event ){

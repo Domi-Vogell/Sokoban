@@ -1,0 +1,15 @@
+Bei Sokoban steuert man eine Figur, die alle Boxen auf die Zielfelder schieben muss.
+
+Steuern kann man die Figur mithilfe der Pfeiltasten, mit den Tasten W, A, S und D oder mit Klicken auf die unmittelbar neben der Figur liegende Fläche.
+
+Ziel des Spiels ist es, dass jede Box auf einem Zielfeld steht. Die Zielfelder sind blau eingefärbt. Ist eine Box auf einem Zielfeld, färbt sich auch die Box blau. 
+
+Man kann Boxen auch wieder von den Zielfeldern herunter schieben. Ein Schieben von mehreren Boxen gleichzeitig ist nicht möglich. Die Boxen können ebenso nicht über die Ziegelstein-Wände gehoben werden. Ist eine Box unwiederkehrbar gefangen, müssen Sie das Level neustarten.
+
+Die Kamera-Position kann in der Seitenleiste der Level ausgewählt werden. Eine Auswahl zwischen zwei Perspektiven steht zur Verfügung.
+
+Wollen Sie aus dem Level zurück ins Menü gelangen, klicken Sie auf den vorgesehenen Button auf der Seitenleiste. Wollen Sie Ihren Spielfortschritt zurücksetzen, klicken Sie auf den "Zurücksetzen"-Button, der ebenso in der Seitenleiste zur Verfügung steht.
+
+Um das Level neu zu laden, klicken Sie auf den Button vom entsprechenden Level in der Seitenleiste.
+
+Viel Spaß beim Spielen!

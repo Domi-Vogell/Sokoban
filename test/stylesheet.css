@@ -114,3 +114,14 @@
     width: 45%;
     height: 5vh;
 }
+
+.anleitungSeite{
+    padding: 0.5em 2em 2em 2em;
+    font-size: 2vmin;
+    color: white;
+    text-align: justify;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 2vh;
+    font-family: sans-serif;
+}
