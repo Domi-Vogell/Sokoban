@@ -5,7 +5,7 @@ const THREE = pack.THREE;
 
 const Bein = function( obj ){
     const geoOberschenkel = new THREE.BoxGeometry(1, 2);
-    const matOberschenkel = new THREE.MeshBasicMaterial( { color: 0xAAAAAA } );
+    const matOberschenkel = new THREE.MeshPhongMaterial( { color: 0xAAAAAA } );
     THREE.Mesh.call( this, geoOberschenkel, matOberschenkel );
     this.position.set( obj.x, obj.y, obj.z );
     this.rotation.x = -Math.PI / 8;
@@ -18,7 +18,7 @@ const Bein = function( obj ){
     this.add( this.knie );
     
     const geoUnterschenkel = new THREE.BoxGeometry(1, 2.5);
-    const matUnterschenkel = new THREE.MeshBasicMaterial( { color: 0xAAAAAA } );
+    const matUnterschenkel = new THREE.MeshPhongMaterial( { color: 0xAAAAAA } );
     this.unterschenkel = new THREE.Mesh( geoUnterschenkel, matUnterschenkel );
     this.unterschenkel.position.set( 0, -1.2, -0.4 );
     this.unterschenkel.rotation.x = Math.PI / 8;

@@ -4,7 +4,7 @@ const THREE = pack.THREE;
 
 const Hut = function( object ){
     const geoHut = new THREE.ConeGeometry( 2, 3, 16 );
-    const matHut = new THREE.MeshBasicMaterial( { color: object.hutfarbe } );
+    const matHut = new THREE.MeshPhongMaterial( { color: object.hutfarbe } );
     THREE.Mesh.call( this, geoHut, matHut );
     this.position.set( 0, 3, 0 );
     this.castShadow = true;

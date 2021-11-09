@@ -9,14 +9,17 @@ let level;
 const ui = new UI();
 const THREE = pack.THREE;
 const VP = new pack.Playground({ grassground: false }).VP;
-VP.control.enabled = false;
+VP.control.enabled = true;
+VP.control.target.set( 500, 0, 250 );
+console.log( VP.control );
 
-// add a ambient light
-//VP.scene.add( new THREE.AmbientLight( 0x020202 ));
-// add a light in front
 
-//let light = new THREE.Point( 0xffffff );
-//light.position.set( 0, 1, 0 );
+let light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+light.position.set( 0, 500, 250 );
+VP.scene.add( light );
+VP.scene.add( new THREE.AmbientLight( 0xffffff, 0.7 ));
+VP.scene.background.set( 0x404040 );
+
 VP.renderer.shadowMap.enabled = true
 VP.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const textures = new Textures();
@@ -24,7 +27,6 @@ let toggleTaste = false;
 
 //FIGUR
 const mhkzwerg = new Zwerg({ hutfarbe: 0xFF0000, groesse: 0.8, textur: textures.matFigur });
-mhkzwerg.castShadow = true;
 VP.scene.add( mhkzwerg );
 
 //RASTER
@@ -43,6 +45,7 @@ const rasterBauen = function(){
             const boden = new Boden();
             playground.boden.push( boden );
             boden.position.set( k * playground.quadrat + playground.quadrat / 2, 0, i * playground.quadrat + playground.quadrat / 2 );
+            boden.material.side = THREE.DoubleSide;
             VP.scene.add( boden );
             
             if( raster[i][k] == 1 ){
@@ -57,13 +60,15 @@ const rasterBauen = function(){
                 mhkzwerg.position.set( k * playground.quadrat + playground.quadrat / 2, 130, i * playground.quadrat + playground.quadrat / 2 );
                 mhkzwerg.rotation.z = 0;
                 playground.position = new THREE.Vector3( k * playground.quadrat + playground.quadrat / 2, 130, i * playground.quadrat + playground.quadrat / 2 );
+                mhkzwerg.receiveShadow = true;
+                mhkzwerg.castShadow = true;
                 raster[i][k] = 0;
             }
             else if( raster[i][k] == 3 ){
                 const b = new Box({ width: 80, height: 80, depth: 80 });
                 b.rasterPosition.set( i, k );
                 playground.boxen.push( b );
-                b.position.set( k * playground.quadrat + playground.quadrat / 2, 40, i * playground.quadrat + playground.quadrat / 2 );
+                b.position.set( k * playground.quadrat + playground.quadrat / 2, 40.5, i * playground.quadrat + playground.quadrat / 2 );
                 b.castShadow = true;
                 b.receiveShadow = true;
                 VP.scene.add( b );
@@ -71,18 +76,20 @@ const rasterBauen = function(){
             else if( raster[i][k] == 4 ){
                 const ziel = new Zielfeld();
                 playground.zielfeld.push( ziel );
-                ziel.position.set( k * playground.quadrat + playground.quadrat / 2, 0.5, i * playground.quadrat + playground.quadrat / 2 );
+                ziel.position.set( k * playground.quadrat + playground.quadrat / 2, 0, i * playground.quadrat + playground.quadrat / 2 );
+                ziel.receiveShadow = true;
                 VP.scene.add( ziel );
             }
             else if( raster[i][k] == 5 ){
                 const ziel2 = new Zielfeld();
                 playground.zielfeld.push( ziel2 );
-                ziel2.position.set( k * playground.quadrat + playground.quadrat / 2, 0.5, i * playground.quadrat + playground.quadrat / 2 );
+                ziel2.position.set( k * playground.quadrat + playground.quadrat / 2, 0, i * playground.quadrat + playground.quadrat / 2 );
+                ziel2.receiveShadow = true;
                 VP.scene.add( ziel2 );
                 
                 const box = new Box({ width: 80, height: 80, depth: 80 });
                 box.rasterPosition.set( i, k );
-                box.position.set( k * playground.quadrat + playground.quadrat / 2, 40, i * playground.quadrat + playground.quadrat / 2 );
+                box.position.set( k * playground.quadrat + playground.quadrat / 2, 40.5, i * playground.quadrat + playground.quadrat / 2 );
                 box.receiveShadow = true;
                 box.castShadow = true;
                 box.material = textures.donematerial;
@@ -173,6 +180,7 @@ const cameraOne = function(){
     VP.camera.position.y = 600;
     VP.camera.position.z = 1200;
     VP.camera.lookAt( 500, 0, 250 );
+    VP.control.target.set( 500, 0, 250 );
     myStorage.setItem( 'cameraPosition', 1 );
 }
 
@@ -181,6 +189,7 @@ const cameraTwo = function(){
     VP.camera.position.y = 1000;
     VP.camera.position.z = 350;
     VP.camera.lookAt( 500, 0, 350 );
+    VP.control.target.set( 500, 0, 350 );
     myStorage.setItem( 'cameraPosition', 2 );
 }
 
@@ -285,6 +294,11 @@ const nextLevel = function(){
     mhkzwerg.rechterArm.rotation.x = 0;
     mhkzwerg.linkerArm.rotation.x = 0;
     mhkzwerg.rotation.y = 0;
+
+    if( level == 2 ){
+        document.getElementById( "completed" ).style.visibility = 'visible';
+        document.getElementById( "Seitenleiste" ).style.visibility = 'hidden';
+    }
 
     if( playground.raster.length >= level ){
         if( ui.highestLevel < level && playground.raster.length > ui.highestLevel ){

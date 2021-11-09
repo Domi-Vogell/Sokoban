@@ -5,7 +5,7 @@ const THREE = pack.THREE;
 
 const Arm = function( obj ) {
     const geoArm = new THREE.BoxGeometry( 2, 0.5 );
-    const matArm = new THREE.MeshBasicMaterial( { color: 0xBBBBBB } );
+    const matArm = new THREE.MeshPhongMaterial( { color: 0xBBBBBB } );
     THREE.Mesh.call( this, geoArm, matArm );
     this.position.set( obj.x, obj.y, obj.z );
     this.rotation.z = -Math.PI / 4;
@@ -24,7 +24,7 @@ const Arm = function( obj ) {
     this.add( this.elle );
 
     const geoArmU = new THREE.BoxGeometry( 2, 0.5 );
-    const matArmU = new THREE.MeshBasicMaterial( { color: 0xBBBBBB } );
+    const matArmU = new THREE.MeshPhongMaterial( { color: 0xBBBBBB } );
     this.Unterarm = new THREE.Mesh( geoArmU, matArmU );
     this.Unterarm.position.set( 1, -0.5, 0 );
     this.Unterarm.rotation.z = -Math.PI / 8;
