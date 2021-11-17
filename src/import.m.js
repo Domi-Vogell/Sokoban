@@ -8,5 +8,6 @@ import { Textures } from './textures.m.js';
 import { Boden } from './boden.m.js';
 import { myTween } from './tweens.m.js';
 import { UI } from './ui.m.js';
+import { Audio } from './audio.m.js';
 
-export{ pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI };
+export{ pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio };

@@ -5436,7 +5436,7 @@ const DomeventPointer = {
         this._onMouseEvent      = function(){ _onMouseEvent.apply( _this, arguments ); };
 
         this._$onPointerDown	= function(){ _onPointerDown.apply( _this, arguments ); };
-	    this._$onPointerUp	    = function(){ _onPointerUp.apply( _this, arguments ); };
+	      this._$onPointerUp	    = function(){ _onPointerUp.apply( _this, arguments ); };
   
 
         this._$onPointerMove	= function(){ _onPointerMove.apply(_this, arguments);	};

@@ -1,4 +1,4 @@
-import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI } from "../../src/import.m.js"
+import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio } from "../../src/import.m.js"
 
 //Parameter-Einlesung
 let url = new URL( window.location.href );
@@ -9,19 +9,25 @@ let level;
 const ui = new UI();
 const THREE = pack.THREE;
 const VP = new pack.Playground({ grassground: false }).VP;
+let audio;
 VP.control.enabled = true;
 VP.control.target.set( 500, 0, 250 );
-console.log( VP.control );
 
 
-let light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-light.position.set( 0, 500, 250 );
+let light = new THREE.DirectionalLight( 0xffffff, 0.4 );
+light.position.set( 500, 500, 500 );
+light.castShadow = true;
+light.shadow.camera.near = 0;
+light.shadow.camera.far = 1000;
+light.shadow.camera.right = 700;
+light.shadow.camera.left = - 700;
+light.shadow.camera.top	= 700;
+light.shadow.camera.bottom = - 700;
+light.target.position.set( 250, 0, 0 );
 VP.scene.add( light );
-VP.scene.add( new THREE.AmbientLight( 0xffffff, 0.7 ));
+VP.scene.add( new THREE.AmbientLight( 0xffffff, 0.6 ));
 VP.scene.background.set( 0x404040 );
 
-VP.renderer.shadowMap.enabled = true
-VP.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const textures = new Textures();
 let toggleTaste = false;
 
@@ -46,6 +52,7 @@ const rasterBauen = function(){
             playground.boden.push( boden );
             boden.position.set( k * playground.quadrat + playground.quadrat / 2, 0, i * playground.quadrat + playground.quadrat / 2 );
             boden.material.side = THREE.DoubleSide;
+            boden.receiveShadow = true;
             VP.scene.add( boden );
             
             if( raster[i][k] == 1 ){
@@ -194,6 +201,8 @@ const cameraTwo = function(){
 }
 
 const initialisierung = function(){
+    audio = new Audio( VP );
+
     document.addEventListener( 'rasterReady'        , holdirRaster      );
     document.addEventListener( 'levelErfolgreich'   , afterLevel        );
     document.addEventListener( 'tastenFreigeben'    , setZwergStandort  );
@@ -295,11 +304,6 @@ const nextLevel = function(){
     mhkzwerg.linkerArm.rotation.x = 0;
     mhkzwerg.rotation.y = 0;
 
-    if( level == 2 ){
-        document.getElementById( "completed" ).style.visibility = 'visible';
-        document.getElementById( "Seitenleiste" ).style.visibility = 'hidden';
-    }
-
     if( playground.raster.length >= level ){
         if( ui.highestLevel < level && playground.raster.length > ui.highestLevel ){
             ui.highestLevel = level;
@@ -350,6 +354,7 @@ const removeBoxes = function(){
 
 const afterLevel = function(){
     document.getElementById( "target" ).style.visibility = 'visible';
+    audio.sound.play();
 }
 
 

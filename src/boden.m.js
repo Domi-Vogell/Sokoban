@@ -13,7 +13,6 @@ const Boden = function( opts ){
     const o = this.options = Object.assign({}, defaults, opts );
 
     const geometry = new THREE.PlaneGeometry( 100, 100 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x0000FF } );
     THREE.Mesh.call( this, geometry, textures.matBoden );
     this.rotation.x = -Math.PI / 2;
 };

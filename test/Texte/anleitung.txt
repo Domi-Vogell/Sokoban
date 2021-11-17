@@ -6,7 +6,7 @@ Ziel des Spiels ist es, dass jede Box auf einem Zielfeld steht. Die Zielfelder s
 
 Man kann Boxen auch wieder von den Zielfeldern herunter schieben. Ein Schieben von mehreren Boxen gleichzeitig ist nicht möglich. Die Boxen können ebenso nicht über die Ziegelstein-Wände gehoben werden. Ist eine Box unwiederkehrbar gefangen, müssen Sie das Level neustarten.
 
-Die Kamera-Position kann in der Seitenleiste der Level ausgewählt werden. Eine Auswahl zwischen zwei Perspektiven steht zur Verfügung.
+Die Kamera-Position kann in der Seitenleiste der Level ausgewählt werden. Eine Auswahl zwischen zwei Perspektiven steht zur Verfügung. Außerdem kann man sich mit Links- und Rechtsklick frei im Raum bewegen.
 
 Wollen Sie aus dem Level zurück ins Menü gelangen, klicken Sie auf den vorgesehenen Button auf der Seitenleiste mit der Aufschrift "Menü". Wollen Sie Ihren Spielfortschritt zurücksetzen, klicken Sie auf den "Zurücksetzen"-Button, der ebenso in der Seitenleiste zur Verfügung steht.
 
