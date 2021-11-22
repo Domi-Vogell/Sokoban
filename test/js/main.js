@@ -1,4 +1,4 @@
-import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio } from "../../src/import.m.js"
+import { pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio, Timer } from "../../src/import.m.js"
 
 //Parameter-Einlesung
 let url = new URL( window.location.href );
@@ -25,7 +25,9 @@ light.shadow.camera.top	= 700;
 light.shadow.camera.bottom = - 700;
 light.target.position.set( 250, 0, 0 );
 VP.scene.add( light );
-VP.scene.add( new THREE.AmbientLight( 0xffffff, 0.6 ));
+
+let ambientLight = new THREE.AmbientLight( 0xffffff, 0.6 );
+VP.scene.add( ambientLight );
 VP.scene.background.set( 0x404040 );
 
 const textures = new Textures();
@@ -115,6 +117,7 @@ const holdirRaster = function( ev ) {
     ui.setInactive();
     ui.registerEvents();
     ui.levelComplete();
+    ui.timerPopup();
 }
 
 
@@ -171,7 +174,7 @@ const continueGame = function(){
 
 const weiterClicked = function(){
     level = parseInt( level ) + 1;
-
+    audio.feuerwerk.stop();
     nextLevel();
 }
 
@@ -200,6 +203,21 @@ const cameraTwo = function(){
     myStorage.setItem( 'cameraPosition', 2 );
 }
 
+const tenSecondDimmen = function(){
+    tween.lichtDimmen( ambientLight );
+    tween.lichtDimmen( light );
+};
+
+const timerDone = function(){
+    toggleTaste = true;
+    document.getElementById( "timerPopup" ).style.visibility = 'visible';
+    //in popup: restart geklickt -> toggle + popup hide + Level restart
+}
+
+const restartLevel = function(){
+    nextLevel();
+}
+
 const initialisierung = function(){
     audio = new Audio( VP );
 
@@ -213,6 +231,9 @@ const initialisierung = function(){
     document.addEventListener( 'resetClicked'       , resetGame         );
     document.addEventListener( 'cameraOne'          , cameraOne         );
     document.addEventListener( 'cameraTwo'          , cameraTwo         );
+    document.addEventListener( 'tenSeconds'         , tenSecondDimmen   );
+    document.addEventListener( 'timerDone'          , timerDone         );
+    document.addEventListener( 'restartLevel'       , restartLevel      );
     VP.scene.addEventListener( 'click'              , onclick           );
     window.addEventListener  ( 'keydown'            , onkeydown         );
 
@@ -289,6 +310,8 @@ const levelAufbau = function(){
     rasterBauen();
     playground.searchStandort();
     toggleTaste = false;
+    audio.startGlocke.play();
+    Timer( VP.loop );
 }
 
 
@@ -303,6 +326,10 @@ const nextLevel = function(){
     mhkzwerg.rechterArm.rotation.x = 0;
     mhkzwerg.linkerArm.rotation.x = 0;
     mhkzwerg.rotation.y = 0;
+    toggleTaste = false;
+    ambientLight.intensity = 0.6;
+    light.intensity = 0.4;
+    //licht==
 
     if( playground.raster.length >= level ){
         if( ui.highestLevel < level && playground.raster.length > ui.highestLevel ){
@@ -354,7 +381,7 @@ const removeBoxes = function(){
 
 const afterLevel = function(){
     document.getElementById( "target" ).style.visibility = 'visible';
-    audio.sound.play();
+    audio.feuerwerk.play();
 }
 
 

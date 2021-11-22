@@ -122,6 +122,54 @@ const UI = function(){
         document.getElementById( "target" ).style.visibility = 'hidden';
     };
 
+    this.timerDoneHandler = function(){
+        document.getElementById( "timerPopup" ).style.visibility = 'hidden';
+
+        const event = new Event( 'restartLevel' );
+        document.dispatchEvent( event );
+    }
+
+    this.timerPopup = function(){
+        let newDiv = document.createElement("div");
+        newDiv.id = "timerPopup";
+        let newParagraph = document.createElement("p");
+        newParagraph.id = "completePara";
+        let newContent = document.createTextNode("Zeit abgelaufen!");
+        let newWeiterButton = document.createElement("button");
+        newWeiterButton.textContent = "Level neustarten";
+        newWeiterButton.id = "timerbutton";
+        newWeiterButton.classList.add( "btnAktiv" );
+        newWeiterButton.onpointerup = this.timerDoneHandler;
+
+        newParagraph.appendChild(newContent);
+        newDiv.appendChild(newParagraph);
+        newDiv.appendChild(newWeiterButton);
+        var style = document.createElement('style');
+        style.innerHTML = `
+        #timerPopup {
+            color: white;
+            width: 40vw;
+            height: 40vh;
+            border: solid grey;
+            text-align: center;
+            background-color: #333333;
+            left: 18%;
+            top: 25%;
+            position: absolute;
+        }
+        #completePara{
+            font-size: 40px;
+            margin-top: 20%;
+        }
+        `;
+        document.head.appendChild(style);
+
+        // füge das neu erstellte Element und seinen Inhalt ins DOM ein
+        var currentDiv = document.getElementById("Seitenleiste");
+        document.body.insertBefore(newDiv, currentDiv);
+        document.getElementById( "timerPopup" ).style.visibility = 'hidden';
+    };
+
     this.startHandler = function( ev ){
         document.getElementById( "start" ).style.visibility = 'hidden'; 
         document.getElementById( "Seitenleiste" ).style.visibility = 'visible'; 
@@ -410,6 +458,11 @@ const UI = function(){
             newButton.dataset.level = (i + 1);
             newDiv.appendChild( newButton );
         }
+
+        let countDown = document.createElement( "div" );
+        countDown.id = "countdown";
+        countDown.classList.add( "Levelauswahl" );
+
         let siteDiv = document.createElement( "div" );
         siteDiv.id = "siteDiv";
 
@@ -443,6 +496,7 @@ const UI = function(){
         resetBtn.onpointerup = this.resetHandler;
         
         ContentWrapper.appendChild( newDiv );
+        ContentWrapper.appendChild( countDown );
         cameraDiv.appendChild( cameraPosOne );
         cameraDiv.appendChild( cameraPosTwo );
         siteDiv.appendChild( menuBtn );

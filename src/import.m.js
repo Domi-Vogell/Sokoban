@@ -9,5 +9,6 @@ import { Boden } from './boden.m.js';
 import { myTween } from './tweens.m.js';
 import { UI } from './ui.m.js';
 import { Audio } from './audio.m.js';
+import { Timer } from './timer.m.js';
 
-export{ pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio };
+export{ pack, Zwerg, Spielplatz, Box, Wand, Zielfeld, Textures, Boden, myTween, UI, Audio, Timer };

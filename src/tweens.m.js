@@ -815,6 +815,31 @@ const myTween = function( VP, playground ){
         }, 1400 );
     }
 
+    this.lichtDimmen = function( licht ){
+        let lichtStart = { i: licht.intensity };
+        let targetLicht = { i: 0.1 };
+        let tweenLicht = new TWEEN.Tween( lichtStart )
+                        .to( targetLicht, 11000 );
+
+        tweenLicht.onUpdate( function(){
+            if( document.getElementById( "target" ).style.visibility == 'visible' ){
+                tweenLicht.stop();       
+            }
+            licht.intensity = lichtStart.i;
+        });
+
+        tweenLicht.start();
+        VP.loop.add( TWEEN.update );
+
+        tweenLicht.onComplete( function(){ 
+            if( document.getElementById("countdown").innerHTML = "Zeit abgelaufen" ){
+                const event = new Event( 'timerDone' );
+                document.dispatchEvent( event );
+            }
+        });
+    }
+
+
     this.tweenMoveUp = function( mhkzwerg ){
         let zwergKopf = { y: mhkzwerg.kopf.rotation.y };
         let targetKopf = { y: Math.PI / 4 };
