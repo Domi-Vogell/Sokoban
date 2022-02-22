@@ -195,8 +195,6 @@ const UI = function(){
             return;
         }
 
-        console.log( document.getElementById( "start" ));
-
         document.getElementById( "start" ).style.visibility = 'hidden'; 
         document.getElementById( "Seitenleiste" ).style.visibility = 'visible'; 
         document.getElementById( "menuBtn" ).classList.add( "btnAktiv" ); 
@@ -290,7 +288,6 @@ const UI = function(){
     this.startseiteHandler = function(){
         document.getElementById("completed").style.visibility = "hidden";
         document.getElementById("start").style.visibility = "visible";
-        console.log( "jetzt" );
     };
 
     this.lastLevelCompleted = function(){

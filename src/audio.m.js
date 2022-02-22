@@ -15,7 +15,7 @@ const Audio = function( viewport ){
     // create a global audio source
     scope.feuerwerk = new THREE.Audio( listener );
 
-    audioLoader.load( 'Test/Sounds/feuerwerk.mp3', function( buffer ) {
+    audioLoader.load( '../test/Sounds/feuerwerk.mp3', function( buffer ) {
         scope.feuerwerk.setBuffer( buffer );
         scope.feuerwerk.setLoop( false );
         scope.feuerwerk.setVolume( 0.5 );
@@ -23,7 +23,7 @@ const Audio = function( viewport ){
 
     scope.startGlocke = new THREE.Audio( listener );
 
-    audioLoader.load( 'Test/Sounds/start.mp3', function( buffer ) {
+    audioLoader.load( '../test/Sounds/start.mp3', function( buffer ) {
         scope.startGlocke.setBuffer( buffer );
         scope.startGlocke.setLoop( false );
         scope.startGlocke.setVolume( 0.5 );

@@ -9,7 +9,7 @@ let level;
 const ui = new UI();
 const THREE = pack.THREE;
 const VP = new pack.Playground({ grassground: false }).VP;
-let audio;
+//let audio;
 VP.control.enabled = true;
 VP.control.target.set( 500, 0, 250 );
 
@@ -174,7 +174,7 @@ const continueGame = function(){
 
 const weiterClicked = function(){
     level = parseInt( level ) + 1;
-    audio.feuerwerk.stop();
+    //audio.feuerwerk.stop();
     nextLevel();
 }
 
@@ -219,7 +219,7 @@ const restartLevel = function(){
 }
 
 const initialisierung = function(){
-    audio = new Audio( VP );
+    //audio = new Audio( VP );
 
     document.addEventListener( 'rasterReady'        , holdirRaster      );
     document.addEventListener( 'levelErfolgreich'   , afterLevel        );
@@ -310,7 +310,7 @@ const levelAufbau = function(){
     rasterBauen();
     playground.searchStandort();
     toggleTaste = false;
-    audio.startGlocke.play();
+    //audio.startGlocke.play();
     Timer( VP.loop );
 }
 
@@ -381,7 +381,7 @@ const removeBoxes = function(){
 
 const afterLevel = function(){
     document.getElementById( "target" ).style.visibility = 'visible';
-    audio.feuerwerk.play();
+    //audio.feuerwerk.play();
 }
 
 

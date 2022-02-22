@@ -10,6 +10,8 @@ Die Kamera-Position kann in der Seitenleiste der Level ausgewählt werden. Eine 
 
 Wollen Sie aus dem Level zurück ins Menü gelangen, klicken Sie auf den vorgesehenen Button auf der Seitenleiste mit der Aufschrift "Menü". Wollen Sie Ihren Spielfortschritt zurücksetzen, klicken Sie auf den "Zurücksetzen"-Button, der ebenso in der Seitenleiste zur Verfügung steht.
 
+Pro Level haben Sie drei Minuten Zeit. Sollte die Zeit ablaufen, verdunkelt sich das Level und Sie müssen das Level neu starten.
+
 Um das Level neu zu laden, klicken Sie auf den Button vom entsprechenden Level in der Seitenleiste.
 
 Viel Spaß beim Spielen!
